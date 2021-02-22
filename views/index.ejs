@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js" integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA==" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <input type="text" class="message">
+    <button onclick="sendMessage()">Send message</button>
+    <h3></h3>
+    <script>
+        const socket = io('http://localhost:3000')
+        socket.on('connection')
+
+        socket.on('message', (data) => {
+            document.querySelector('h3').innerHTML = data 
+        })
+
+        const sendMessage = () => {
+            const input = document.querySelector('.message').value
+            socket.emit('message' , input)
+        }
+    </script>
+</body>
+</html>
